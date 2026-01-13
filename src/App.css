@@ -1,0 +1,524 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Toolbar */
+.toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.toolbar h1 {
+  color: white;
+  font-size: 1.5rem;
+  margin-right: 20px;
+}
+
+.tool-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.tool-group label {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tool-group select,
+.tool-group input[type="text"] {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+.tool-group input[type="text"] {
+  width: 200px;
+}
+
+.color-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.color-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+}
+
+.color-btn.selected {
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.toolbar-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toolbar-btn.primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.toolbar-btn.primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.toolbar-btn.secondary {
+  background: white;
+  color: #333;
+}
+
+.toolbar-btn.secondary:hover {
+  background: #f0f0f0;
+}
+
+.toolbar-btn.danger {
+  background: #f44336;
+  color: white;
+}
+
+.toolbar-btn.danger:hover {
+  background: #d32f2f;
+}
+
+/* Editor Area */
+.editor-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Page */
+.page-container {
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto 30px auto;
+  padding: 8mm;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 10mm;
+}
+
+.page-title {
+  font-size: 28pt;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 5mm;
+}
+
+.page-composer {
+  font-size: 14pt;
+  font-style: italic;
+  text-align: right;
+  margin-bottom: 5mm;
+}
+
+/* Staff System - Grid Based */
+.staff-system-grid {
+  position: relative;
+  width: 100%;
+}
+
+/* Clef overlay - positioned on top of staff lines */
+.clef-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.treble-clef-overlay {
+  font-size: 52pt;
+  font-family: 'Times New Roman', serif;
+  line-height: 1;
+  user-select: none;
+  margin-left: 2mm;
+}
+
+.time-signature-overlay {
+  font-size: 24pt;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+  user-select: none;
+  margin-left: 3mm;
+}
+
+.staff-lines-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.staff-line-grid {
+  position: absolute;
+  width: 100%;
+  background: black;
+}
+
+.measure-line-grid {
+  position: absolute;
+  top: 20%;
+  height: 60%;
+  background: black;
+  z-index: 2;
+}
+
+/* Beat Grid */
+.beat-grid {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.beat-column {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+/* Note Cell */
+.note-cell {
+  position: absolute;
+  width: 100%;
+  height: 14%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.note-cell:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 4px;
+}
+
+.note-cell.has-note {
+  z-index: 15;
+}
+
+.note-cell.has-note:hover {
+  background: rgba(244, 67, 54, 0.1);
+}
+
+/* Note Content in Grid */
+.note-cell-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-cell-content.preview {
+  opacity: 0.4;
+}
+
+.note-head-grid {
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.note-stem-grid {
+  position: absolute;
+  background: black;
+  right: 0;
+  bottom: 50%;
+}
+
+.note-stem-grid.down {
+  right: auto;
+  left: 0;
+  bottom: auto;
+  top: 50%;
+}
+
+.note-flag-grid {
+  position: absolute;
+  right: -4mm;
+  top: -20mm;
+  font-size: 18pt;
+}
+
+.note-flag-grid.down {
+  right: auto;
+  left: -4mm;
+  top: auto;
+  bottom: -20mm;
+  transform: scaleY(-1);
+}
+
+.note-accidental {
+  position: absolute;
+  left: -8mm;
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+/* Ledger Lines */
+.ledger-line-indicator {
+  position: absolute;
+  width: 20mm;
+  height: 2px;
+  background: black;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+/* Rest Content */
+.rest-cell-content {
+  font-size: 28pt;
+  user-select: none;
+}
+
+.rest-cell-content.preview {
+  opacity: 0.4;
+}
+
+/* Page Controls */
+.page-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Instructions */
+.instructions {
+  background: #e3f2fd;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.instructions h3 {
+  color: #1976d2;
+  margin-bottom: 10px;
+}
+
+.instructions ul {
+  margin-left: 20px;
+  color: #333;
+}
+
+.instructions li {
+  margin-bottom: 5px;
+}
+
+/* Print styles */
+@media print {
+  .toolbar,
+  .page-controls,
+  .instructions {
+    display: none !important;
+  }
+
+  .editor-area {
+    padding: 0;
+  }
+
+  .page-container {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+
+  .note-cell:hover {
+    background: transparent;
+  }
+}
+
+/* Settings Modal */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.settings-modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f0f0f0;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.settings-content {
+  padding: 24px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section h3 {
+  font-size: 1rem;
+  color: #667eea;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #667eea;
+}
+
+.setting-item {
+  margin-bottom: 20px;
+}
+
+.setting-item label {
+  display: block;
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.setting-item input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e0e0e0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.setting-item input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  border: none;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-container {
+    width: 100%;
+    min-height: auto;
+    padding: 10mm;
+  }
+}
