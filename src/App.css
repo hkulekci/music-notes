@@ -12,7 +12,7 @@
   flex-wrap: wrap;
   gap: 15px;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 8px 12px;
   border-radius: 8px;
 }
@@ -73,7 +73,7 @@
 
 .color-btn.selected {
   border-color: white;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .toolbar-btn {
@@ -128,7 +128,7 @@
   min-height: 297mm;
   margin: 0 auto 30px auto;
   padding: 8mm;
-  box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
   position: relative;
 }
 
@@ -249,6 +249,10 @@
   background: rgba(244, 67, 54, 0.1);
 }
 
+.note-cell.covered {
+  pointer-events: none;
+}
+
 /* Note Content in Grid */
 .note-cell-content {
   position: relative;
@@ -280,19 +284,34 @@
   top: 50%;
 }
 
-.note-flag-grid {
+/* Nota Bayrakları (Flags) - CSS ile çizim */
+.note-flag-container {
   position: absolute;
-  right: -4mm;
-  top: -20mm;
-  font-size: 18pt;
+  right: 0;
+  bottom: calc(50% + 1mm);
+  width: 12px;
+  height: 20mm;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: translateX(100%);
 }
 
-.note-flag-grid.down {
+.note-flag-container.down {
   right: auto;
-  left: -4mm;
-  top: auto;
-  bottom: -20mm;
-  transform: scaleY(-1);
+  left: 0;
+  bottom: auto;
+  top: calc(50% + 1mm);
+  transform: translateX(-100%) scaleY(-1);
+}
+
+.note-flag-line {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(135deg, transparent 40%, #000 40%, #000 60%, transparent 60%);
+  border-right: 2px solid #000;
+  border-radius: 0 0 8px 0;
 }
 
 .note-accidental {
@@ -357,6 +376,7 @@
 
 /* Print styles */
 @media print {
+
   .toolbar,
   .page-controls,
   .instructions {
